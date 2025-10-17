@@ -28,7 +28,7 @@ This project was born from the need to have a mouse jiggler on computers where:
 ## 📦 Installation
 
 1. Clone the repository:
-git clone https://github.com/yourusername/mouse-jiggler-dotnet.git
+git clone https://github.com/GCaringi/InvisibleJiggler
 cd mouse-jiggler-dotnet
 
 2. Build the project:
