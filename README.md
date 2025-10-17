@@ -49,8 +49,8 @@ dotnet run
 
 You can easily modify:
 
-- **Movement interval**: Change `Thread.Sleep(rnd.Next(180000, 240000))` in `MouseJiggler.cs`
-- **Movement distance**: Modify `_random.Next(50, 101)` for different pixel ranges
+- **Movement interval**: Change `Thread.Sleep(1000)` in `MouseJiggler.cs`
+- **Movement distance**: Modify `_random.Next(0, 1)` for different pixel ranges
 - **Sleep behavior**: Remove flags in `Constants.cs`
 
 ## 📝 Notes
