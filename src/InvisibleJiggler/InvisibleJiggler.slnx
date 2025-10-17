@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../../tests/InvisibleJiggler.Test/InvisibleJiggler.Test.csproj" Id="eee7626d-c88b-4cf9-82b2-8a61c319eec6" />
   <Project Path="InvisibleJiggler/InvisibleJiggler.csproj" />
 </Solution>

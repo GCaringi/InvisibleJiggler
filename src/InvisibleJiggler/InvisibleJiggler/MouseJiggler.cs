@@ -1,21 +1,30 @@
-using System;
+using InvisibleJiggler.Windows.Api;
+using InvisibleJiggler.Windows.Api.Interface;
 using System.Runtime.InteropServices;
-using System.Threading;
-using InvisibleJiggler.WindowsApi;
 
 namespace InvisibleJiggler
 {
-    internal class MouseJiggler
+    public class MouseJiggler
     {
+        private readonly IWindowsApiService _windowsApi;
         private volatile bool _running = true;
         private readonly Random _random = new Random();
 
-        public void Start()
+        public MouseJiggler() : this(new WindowsApiService(), new Random())
+        {
+        }
+        public MouseJiggler(IWindowsApiService windowsApi, Random random)
+        {
+            _windowsApi = windowsApi ?? throw new ArgumentNullException(nameof(windowsApi));
+            _random = random ?? throw new ArgumentNullException(nameof(random));
+        }
+
+        internal void Start()
         {
             Console.CancelKeyPress += OnCancelKeyPress;
 
             // Attiva protezione sonno
-            NativeMethods.SetThreadExecutionState(
+            _windowsApi.SetThreadExecutionState(
                 Constants.ES_CONTINUOUS |
                 Constants.ES_SYSTEM_REQUIRED |
                 Constants.ES_DISPLAY_REQUIRED);
@@ -25,17 +34,17 @@ namespace InvisibleJiggler
             RunJigglerLoop();
 
             // Ripristina stato normale
-            NativeMethods.SetThreadExecutionState(Constants.ES_CONTINUOUS);
+            _windowsApi.SetThreadExecutionState(Constants.ES_CONTINUOUS);
             Console.WriteLine("Jiggling stopped.");
         }
 
-        private void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        internal void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             e.Cancel = true;
             _running = false;
         }
 
-        private void RunJigglerLoop()
+        internal void RunJigglerLoop()
         {
             while (_running)
             {
@@ -44,7 +53,7 @@ namespace InvisibleJiggler
             }
         }
 
-        private void PerformMouseMovement()
+        internal void PerformMouseMovement()
         {
             int distance = _random.Next(0, 1);
             int direction = _random.Next(0, 4);
@@ -63,7 +72,7 @@ namespace InvisibleJiggler
 #endif
         }
 
-        private INPUT CreateMouseInput(int distance, int direction)
+        internal INPUT CreateMouseInput(int distance, int direction)
         {
             var input = new INPUT { type = Constants.INPUT_MOUSE };
 
@@ -86,7 +95,7 @@ namespace InvisibleJiggler
             return input;
         }
 
-        private INPUT CreateReturnInput(INPUT original, int distance, int direction)
+        internal INPUT CreateReturnInput(INPUT original, int distance, int direction)
         {
             var input = original;
             switch (direction)
@@ -99,9 +108,14 @@ namespace InvisibleJiggler
             return input;
         }
 
-        private void SendMouseInput(INPUT input)
+        internal void SendMouseInput(INPUT input)
         {
-            NativeMethods.SendInput(1, new[] { input }, Marshal.SizeOf(typeof(INPUT)));
+            _windowsApi.SendInput(1, new[] { input }, Marshal.SizeOf(typeof(INPUT)));
+        }
+
+        public void Stop()
+        {
+            _running = false;
         }
     }
 }

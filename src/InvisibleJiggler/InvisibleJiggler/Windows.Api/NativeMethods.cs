@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace InvisibleJiggler.WindowsApi
+namespace InvisibleJiggler.Windows.Api
 {
     public static class NativeMethods
     {

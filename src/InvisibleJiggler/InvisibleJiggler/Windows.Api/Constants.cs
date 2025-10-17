@@ -1,4 +1,4 @@
-namespace InvisibleJiggler.WindowsApi
+namespace InvisibleJiggler.Windows.Api
 {
     public static class Constants
     {
