@@ -1,75 +1,73 @@
-# TemplateRepository
+# Mouse Jiggler .NET
 
-Template base per la creazione rapida di nuovi progetti con struttura predefinita e configurazione standard [web:18][web:33].
+Un'applicazione console .NET leggera e portatile che simula movimenti del mouse per prevenire la sospensione del sistema e il blocco schermo. Perfetta per ambienti dove non è possibile installare programmi esterni o serve una soluzione a footprint minimo.
 
-[![License](https://img.shields.io/github/license/yourusername/TemplateRepository.svg)](LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/TemplateRepository.svg)](https://github.com/yourusername/TemplateRepository/issues)
+## ✨ Caratteristiche
 
-*Read this in other languages: [English](README.EN.md)*
+- **Nessuna installazione richiesta**: Funziona come semplice applicazione console senza permessi amministrativi
+- **Ultra-leggero**: Nessuna dipendenza esterna, solo chiamate alle API Windows native tramite P/Invoke
+- **Footprint di memoria minimo**: Architettura console che mantiene l'uso delle risorse estremamente basso
+- **Movimenti naturali**: Spostamenti casuali in 4 direzioni con distanze variabili
+- **Previene la sospensione**: Usa `SetThreadExecutionState` per impedire standby e timeout dello schermo
+- **Portabile**: Eseguibile singolo che può essere eseguito da qualsiasi cartella senza installazione
+- **Codice pulito**: Struttura modulare con separazione delle responsabilità
 
-## 📋 Indice
+## 🎯 Caso d'Uso
 
-- [Descrizione](#descrizione)
-- [Come iniziare](#come-iniziare)
-- [Struttura del progetto](#struttura-del-progetto)
-- [Utilizzo](#utilizzo)
-- [Come contribuire](#come-contribuire)
-- [Licenza](#licenza)
+Questo progetto nasce dall'esigenza di avere un mouse jiggler su computer dove:
+- L'installazione di programmi esterni è limitata o vietata
+- Non sono disponibili privilegi amministrativi
+- È richiesta una soluzione portatile
+- Il consumo minimo di risorse è essenziale
 
-## 📖 Descrizione
+## 🚀 Requisiti
 
-Questo repository è un template configurato per aiutarti a iniziare rapidamente nuovi progetti con una struttura organizzata e file essenziali già predisposti [web:33][web:34]. Include configurazioni base, documentazione e best practices per garantire consistenza tra i progetti.
+- Windows 10/11
+- Runtime .NET 10.0
 
-## 🚀 Come iniziare
+## 📦 Installazione
 
-Per creare un nuovo repository partendo da questo template [web:18][web:3]:
+1. Clona la repository:
+git clone https://github.com/tuousername/mouse-jiggler-dotnet.git
+cd mouse-jiggler-dotnet
 
-1. Clicca sul pulsante "Use this template" in alto a destra
-2. Inserisci il nome del nuovo repository
-3. Scegli se renderlo pubblico o privato
-4. Clicca su "Create repository from template"
+2. Compila il progetto:
+dotnet build -c Release
 
-Oppure da linea di comando:
+3. Esegui l'applicazione:
+dotnet run
 
-git clone https://github.com/yourusername/TemplateRepository.git nome-progetto
-cd nome-progetto
-git remote set-url origin https://github.com/yourusername/nome-progetto.git
+## 🔧 Come Funziona
 
-## 📁 Struttura del progetto
+1. **SetThreadExecutionState**: Impedisce al sistema di entrare in standby e allo schermo di spegnersi usando i flag `ES_CONTINUOUS`, `ES_SYSTEM_REQUIRED` e `ES_DISPLAY_REQUIRED`
 
-**Key Files:**
-- `.github/`: GitHub-specific configurations and templates
-- `src/`: Place your source code here
-- `docs/`: Project documentation
-- `tests/`: Unit and integration tests
-- `.gitignore`: Specifies intentionally untracked files
-- `LICENSE`: License information
-- `README.md`: Project overview and documentation
-- `CHANGELOG.md`: Track all project changes
+2. **SendInput**: Simula movimenti reali del mouse che vengono riconosciuti da Windows e dalle applicazioni come attività utente
 
-## 💻 Utilizzo
+3. **Loop intelligente**: Movimenti casuali ogni 3-4 minuti con direzioni e distanze variabili
 
-Dopo aver creato il tuo repository dal template [web:34][web:37]:
+## ⚙️ Personalizzazione
 
-1. Modifica questo README con le informazioni del tuo progetto
-2. Aggiorna il file LICENSE con i tuoi dati
-3. Personalizza il `.gitignore` in base al linguaggio utilizzato
-4. Inizia a sviluppare nella cartella `src/`
+Puoi modificare facilmente:
 
-## 🤝 Come contribuire
+- **Intervallo tra movimenti**: Modifica `Thread.Sleep(rnd.Next(180000, 240000))` in `MouseJiggler.cs`
+- **Distanza movimento**: Cambia `_random.Next(50, 101)` per range di pixel diversi
+- **Comportamento sospensione**: Rimuovi flag in `Constants.cs`
 
-Le contribuzioni sono benvenute! Per contribuire [web:18]:
+## 📝 Note
 
-1. Fai un fork del progetto
-2. Crea un branch per la tua feature (`git checkout -b feature/AmazingFeature`)
-3. Committa le modifiche (`git commit -m 'Add some AmazingFeature'`)
-4. Pusha il branch (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
+- L'applicazione non richiede privilegi di amministratore
+- Il movimento torna sempre alla posizione originale
+- Non interferisce con l'uso normale del PC
+- All'uscita (Ctrl+C) ripristina automaticamente le impostazioni di risparmio energetico
+
+## 🤝 Contributi
+
+I contributi sono benvenuti! Sentiti libero di aprire issue o pull request.
 
 ## 📄 Licenza
 
-Questo progetto è distribuito sotto licenza MIT. Vedi il file `LICENSE` per maggiori informazioni [web:18][web:33].
+Questo progetto è rilasciato sotto licenza MIT. Vedi il file LICENSE per i dettagli.
 
----
+## ⚠️ Disclaimer
 
-Creato con ❤️ per standardizzare lo sviluppo
+Questo software è fornito "così com'è" per scopi educativi e personali. Usa a tuo rischio e responsabilità.

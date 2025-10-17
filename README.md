@@ -1,155 +1,73 @@
-# TemplateRepository
+# Mouse Jiggler .NET
 
-A base template for quickly creating new projects with predefined structure and standard configuration.
+A lightweight, portable .NET console application that simulates mouse movements to prevent system sleep and screen lock. Perfect for environments where you cannot install external programs or need a minimal footprint solution.
 
-[![License](https://img.shields.io/github/license/yourusername/TemplateRepository.svg)](LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/TemplateRepository.svg)](https://github.com/yourusername/TemplateRepository/issues)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/TemplateRepository.svg)](https://github.com/yourusername/TemplateRepository/stargazers)
+## ✨ Features
 
-*Leggi in altre lingue: [Italiano](README.IT.md)*
+- **No installation required**: Runs as a simple console application without admin privileges
+- **Ultra-lightweight**: No external dependencies, only native Windows API calls via P/Invoke
+- **Minimal memory footprint**: Console-based architecture keeps resource usage extremely low
+- **Natural movements**: Random movements in 4 directions with variable distances
+- **Prevents sleep**: Uses `SetThreadExecutionState` to prevent system standby and screen timeout
+- **Portable**: Single executable that can run from any folder without installation
+- **Clean code**: Modular structure with separation of concerns
 
-## 📋 Table of Contents
+## 🎯 Use Case
 
-- [About](#about)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Usage](#usage)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+This project was born from the need to have a mouse jiggler on computers where:
+- Installing external programs is restricted or prohibited
+- Administrative privileges are not available
+- A portable solution is required
+- Minimal resource consumption is essential
 
-## 📖 About
+## 🚀 Requirements
 
-This repository serves as a template designed to help you kickstart new projects quickly with an organized structure and essential files already set up. It includes baseline configurations, documentation, and best practices to ensure consistency across your projects.
+- Windows 10/11
+- .NET 10.0 Runtime
 
-### Built With
+## 📦 Installation
 
-- Git version control
-- Markdown documentation
-- GitHub Actions (optional workflows included)
+1. Clone the repository:
+git clone https://github.com/yourusername/mouse-jiggler-dotnet.git
+cd mouse-jiggler-dotnet
 
-## 🚀 Getting Started
+2. Build the project:
+dotnet build -c Release
 
-To create a new repository from this template:
+3. Run the application:
+dotnet run
 
-### Using GitHub UI
+## 🔧 How It Works
 
-1. Click the "Use this template" button at the top of this repository
-2. Enter your new repository name
-3. Choose whether to make it public or private
-4. Click "Create repository from template"
+1. **SetThreadExecutionState**: Prevents the system from entering standby and the screen from turning off using `ES_CONTINUOUS`, `ES_SYSTEM_REQUIRED`, and `ES_DISPLAY_REQUIRED` flags
 
-### Using Command Line
+2. **SendInput**: Simulates real mouse movements that are recognized by Windows and applications as user activity
 
-Clone the template
-git clone https://github.com/yourusername/TemplateRepository.git your-project-name
+3. **Smart loop**: Random movements every 3-4 minutes with variable directions and distances
 
-Navigate to the directory
-cd your-project-name
+## ⚙️ Customization
 
-Update the remote URL
-git remote set-url origin https://github.com/yourusername/your-project-name.git
+You can easily modify:
 
-Push to your new repository
-git push -u origin main
+- **Movement interval**: Change `Thread.Sleep(rnd.Next(180000, 240000))` in `MouseJiggler.cs`
+- **Movement distance**: Modify `_random.Next(50, 101)` for different pixel ranges
+- **Sleep behavior**: Remove flags in `Constants.cs`
 
-### Prerequisites
+## 📝 Notes
 
-Before using this template, ensure you have:
-
-- Git installed on your system
-- A GitHub account
-- Basic knowledge of version control
-
-### Installation
-
-1. Create your repository from this template (see above)
-2. Clone your new repository locally
-3. Update the README with your project-specific information
-4. Modify the `.gitignore` file based on your project needs
-5. Update the LICENSE file with your information
-6. Start developing!
-
-## 📁 Project Structure
-
-**Key Files:**
-- `.github/`: GitHub-specific configurations and templates
-- `src/`: Place your source code here
-- `docs/`: Project documentation
-- `tests/`: Unit and integration tests
-- `.gitignore`: Specifies intentionally untracked files
-- `LICENSE`: License information
-- `README.md`: Project overview and documentation
-- `CHANGELOG.md`: Track all project changes
-
-## 💻 Usage
-
-After creating your repository from this template:
-
-1. **Update Documentation**: Modify this README with your project details
-2. **Configure `.gitignore`**: Adjust based on your programming language and tools
-3. **Set License**: Update the LICENSE file with appropriate information
-4. **Develop**: Start building your project in the `src/` directory
-5. **Test**: Add tests in the `tests/` directory
-6. **Document**: Keep the `docs/` folder updated with project documentation
-
-### Example
-
-Navigate to your project
-cd your-project-name
-
-Start developing
-Add your code to src/
-Run your tests
-Commit changes
-git add .
-git commit -m "Initial project setup"
-git push
-
-## 🗺️ Roadmap
-
-- [x] Initial template structure
-- [ ] Add CI/CD workflows
-- [ ] Include additional language-specific templates
-- [ ] Add automated testing examples
-- [ ] Create Docker configuration templates
-
-See the [open issues](https://github.com/yourusername/TemplateRepository/issues) for a full list of proposed features and known issues.
+- The application does not require administrator privileges
+- Movement always returns to original position
+- Does not interfere with normal PC usage
+- On exit (Ctrl+C) automatically restores power saving settings
 
 ## 🤝 Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this template better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-Don't forget to give the project a star! Thanks again!
+Contributions are welcome! Feel free to open issues or pull requests.
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` file for more information.
+This project is released under the MIT License. See LICENSE file for details.
 
-## 📫 Contact
+## ⚠️ Disclaimer
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/TemplateRepository](https://github.com/yourusername/TemplateRepository)
-
-## 🙏 Acknowledgments
-
-- [Best README Template](https://github.com/othneildrew/Best-README-Template)
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Shields.io](https://shields.io)
-
----
-
-Made with ❤️ to standardize development workflows
+This software is provided "as is" for educational and personal purposes. Use at your own risk and responsibility.
