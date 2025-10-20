@@ -1,4 +1,4 @@
-# Mouse Jiggler .NET
+# Invisible Jiggler .NET
 
 A lightweight, portable .NET console application that simulates mouse movements to prevent system sleep and screen lock. Perfect for environments where you cannot install external programs or need a minimal footprint solution.
 
