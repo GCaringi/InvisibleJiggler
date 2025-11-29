@@ -3,12 +3,12 @@ using System.Runtime.InteropServices;
 
 namespace InvisibleJiggler.Windows.Api
 {
-    public static class NativeMethods
+    internal static partial class NativeMethods
     {
-        [DllImport("kernel32.dll")]
-        public static extern uint SetThreadExecutionState(uint esFlags);
+        [LibraryImport("kernel32.dll")]
+        public static partial uint SetThreadExecutionState(uint esFlags);
 
-        [DllImport("user32.dll")]
-        public static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
+        [LibraryImport("user32.dll")]
+        public static partial uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
     }
 }

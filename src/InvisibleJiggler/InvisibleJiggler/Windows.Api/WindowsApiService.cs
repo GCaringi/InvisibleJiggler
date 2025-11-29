@@ -1,4 +1,3 @@
-using InvisibleJiggler.Windows.Api;
 using InvisibleJiggler.Windows.Api.Interface;
 
 namespace InvisibleJiggler.Windows.Api
