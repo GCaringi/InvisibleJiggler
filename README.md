@@ -1,4 +1,4 @@
-# Mouse Jiggler
+# Invisible Jiggler
 
 A lightweight .NET console app that keeps your computer awake by simulating mouse movements. Built because sometimes you just need your PC to stay active without messing with power settings.
 
@@ -32,11 +32,15 @@ Double-click `stopJiggler.bat` in the same folder. The app shuts down cleanly.
 
 ## Building from Source
 
-`git clone https://github.com/GCaringi/InvisibleJiggler.git`
-
-`cd mouse-jiggler-dotnet`
-
-`dotnet build -c Release`
+```
+git clone https://github.com/GCaringi/InvisibleJiggler.git
+```
+```
+cd mouse-jiggler-dotnet
+```
+```
+dotnet build -c Release
+```
 
 The compiled executable will be in `bin/Release/net10.0/`
 
